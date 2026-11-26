@@ -1,0 +1,32 @@
+This repository contains or is derived from the following third-party works.
+
+1. robomimic v0.5.0 (third_party/robomimic)
+   https://github.com/ARISE-Initiative/robomimic
+   Copyright (c) 2021 Stanford Vision and Learning Lab. MIT License
+   (third_party/robomimic/LICENSE).
+   The copy is pruned to the Diffusion Policy algorithm and modified: a
+   residual 1D-CNN noise predictor (SimpleConditionalResNet1D) and configurable
+   UNet sizes; observation and action normalization of the validation set
+   during training; `--resume` continuing the most recent run directory;
+   depth observations counted as image observations when environments are
+   created; and lazy loading of the language encoder.
+   robomimic's Diffusion Policy implementation is in turn adapted from
+   Diffusion Policy (C. Chi et al., https://github.com/real-stanford/diffusion_policy,
+   MIT License).
+
+2. Franka Emika Panda MuJoCo model (grace/envs/panda/assets/xml)
+   From MuJoCo Menagerie, https://github.com/google-deepmind/mujoco_menagerie
+   Apache License 2.0 (grace/envs/panda/assets/xml/LICENSE).
+   Modified: the position actuators and the gripper tendon/actuator are
+   replaced by seven joint torque motors (the fingers are not actuated);
+   scene.xml adds mocap obstacle slots, goal/prior ghost bodies and
+   visualization markers (all without contacts in the simulation).
+
+3. Franka Panda URDF (grace/envs/panda/assets/panda.urdf)
+   From franka_ros / franka_description, https://github.com/frankaemika/franka_ros
+   Apache License 2.0. Generated from the xacro description with fixed fingers.
+
+4. The planar obstacle layout (grace/envs/pointmass2d/maps.py) is adapted from
+   the dense 2D environment of Motion Planning Diffusion (J. Carvalho et al.),
+   https://github.com/joaoamcarvalho/mpd-public. Obstacles were moved and added
+   for this work.

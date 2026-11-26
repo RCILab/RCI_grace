@@ -1,0 +1,20 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Generated data, training runs and evaluation results
+data/
+runs/
+results/
+*.hdf5
+*.npz
+*.pth
+
+# VSCode settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db

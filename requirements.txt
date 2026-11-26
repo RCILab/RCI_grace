@@ -1,0 +1,20 @@
+# Tested with Python 3.10 (Ubuntu 22.04) and an NVIDIA GPU (CUDA 12.8).
+numpy==1.26.4
+torch==2.8.0
+torchvision==0.23.0
+diffusers==0.11.1        # newer versions change the DDPM scheduler / EMA API
+huggingface_hub==0.10.1  # required by diffusers 0.11.1
+h5py>=3.8
+scipy>=1.10
+pyyaml>=5.4
+tqdm
+termcolor
+imageio
+matplotlib
+psutil
+tensorboardX             # training logs (robomimic)
+# FR3 task
+mujoco==3.3.4
+pin==2.7.0               # Pinocchio (kinematics of the start/goal sampling); pin 3.x on PyPI requires numpy>=2.2
+# point-mass demonstrations only
+ompl==2.0.1

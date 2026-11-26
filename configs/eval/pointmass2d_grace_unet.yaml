@@ -1,0 +1,17 @@
+# GRACE (UNet) in the planar point-mass task (paper Table II).
+# Run: python scripts/eval_pointmass2d.py configs/eval/pointmass2d_grace_unet.yaml --checkpoint <prior.pth>
+checkpoint: null                  # trained UNet prior (robomimic .pth); set here or with --checkpoint
+env: PointMassDense2DExtra-v0     # base + extra (unseen) obstacles
+seed: 0
+num_episodes: 30
+max_steps: 1000                   # step budget (Table I)
+guidance:                         # GraceConfig, Algorithm 1 (remove this block for the unguided prior)
+  N_g: 10                         # guided reverse steps (of N = 100)
+  K: 1000                         # MPPI samples per guided step
+  lam: 0.5                        # temperature lambda
+  sigma_g: 0.7                    # Sigma_g = sigma_g^2 I, normalized action units
+  w_prior: 1000.0                 # weight of J_prior, eq. (31)
+  paper_rng_compat: true          # reproduce the random stream of the paper runs
+cost:
+  w_obs: 1000.0                   # weight of J_obs, eq. (31)
+output_dir: results/pointmass2d_grace_unet

@@ -1,0 +1,25 @@
+# GRACE (CNN) in the FR3 goal-reaching task (paper Table IV).
+# Run: python scripts/eval_panda.py configs/eval/panda_grace_cnn.yaml --checkpoint <prior.pth>
+checkpoint: null                  # trained CNN prior (robomimic .pth); set here or with --checkpoint
+seed: 0                           # trial i uses the scenario seed (seed + i)
+num_trials: 30
+torch_seed: null                  # the paper runs did not seed torch; set an integer for repeatable runs
+max_steps: 5000                   # step budget (Table I)
+goal_joint_tolerance: 0.03        # success: max_j |q_j - q_goal_j| <= 0.03 rad (Table I)
+joint_limit_tolerance: 0.001      # failure: a joint within 0.001 rad of its limit
+action_clip: [0.05, 0.05, 0.05, 0.05, 0.06, 0.06, 0.06]  # |delta_q| bound per step (rad)
+guidance:                         # GraceConfig, Algorithm 1 (remove this block for the unguided prior)
+  N_g: 5                          # guided reverse steps (of N = 100)
+  K: 1000                         # MPPI samples per guided step
+  lam: 0.01                       # temperature lambda
+  sigma_g: 0.5                    # Sigma_g = sigma_g^2 I, normalized action units
+  w_prior: 100.0                  # weight of J_prior, eq. (31)
+  paper_rng_compat: true
+cost:                             # J_safe = w_obs J_obs + w_self J_self + w_floor J_floor + w_jl J_jl
+  w_obs: 2000.0
+  w_self: 2000.0
+  w_floor: 1600.0
+  w_jl: 2000.0
+  floor_height: 0.01              # capsules must stay this high above the floor (m)
+  joint_limit_margin: 0.01        # J_jl counts joints within this margin of their limits (rad)
+output_dir: results/panda_grace_cnn
